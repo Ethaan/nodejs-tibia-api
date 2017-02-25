@@ -34,15 +34,15 @@ tibiaAPI.getOnlinePlayers(// optional to pass world name here).then((result) => 
 
 **Example response**
 ```
-{ 'Name:': 'Diegopump ',
-  'Sex:': 'male',
-  'Vocation:': 'Elder Druid',
-  'Level:': '257',
-  'Achievement Points:': '171',
-  'World:': 'Morta',
-  'Residence:': 'Thais',
-  'Last Login:': 'Feb 12 2017, 06:35:37 CET',
-  'Account Status:': 'Free Account'
+{ 'name:': 'Diegopump ',
+  'sex:': 'male',
+  'vocation:': 'Elder Druid',
+  'level:': '257',
+  'achievementPoints:': '171',
+  'world:': 'Morta',
+  'residence:': 'Thais',
+  'lastLogin:': 'Feb 12 2017, 06:35:37 CET',
+  'accountStatus:': 'Free Account'
 }
 ```
 

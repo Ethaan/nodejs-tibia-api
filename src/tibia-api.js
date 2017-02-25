@@ -58,4 +58,8 @@ class TibiaAPI {
   }
 }
 
+const tibia = new TibiaAPI({ worldName: 'Zanera'});
+
+tibia.getCharacterInformation('Diegopump').then((result) => console.log(result));
+
 export default TibiaAPI;

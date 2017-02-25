@@ -1,4 +1,5 @@
 import cheerio from 'cheerio';
+import { camelize } from './string-utils';
 
 const getWorldsData = ($) => {
   return (i, tr) => {
@@ -45,7 +46,7 @@ const characterInformationData = ($) => {
       characterData.push($(td).text());
     });
     return {
-      [characterData[0].replace(/^0+/, "")]: characterData[1]
+      [camelize(characterData[0].replace(/^0+/, ""))]: characterData[1]
     };
   }
 };

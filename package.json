@@ -1,6 +1,6 @@
 {
   "name": "tibia-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "NodeJS Tibia.com API",
   "main": "lib/tibia-api.js",
   "scripts": {
