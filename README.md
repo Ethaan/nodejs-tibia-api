@@ -55,3 +55,27 @@ tibiaAPI.getOnlinePlayers(// optional to pass world name here).then((result) => 
   ...deaths
 ]
 ```
+
+`getGuildInformation(guildUrlOrName //guildUrl or GuildName)` - Method to get the guild information by a giving guild URL or guild name.
+
+**Example response**
+```
+[
+  guildMembers: [{
+    rank: ' ',
+     nameAndTitle: 'Devade Pous',
+     vocation: 'Royal Paladin',
+     level: '140',
+     joiningDate: 'Dec 10 2016',
+     status: 'offline',
+     isOnline: false
+  },
+  ...moreCharacters],
+  invitedMembers: [{
+    name: 'Devade Pous',
+    invitationDate: 'Feb 20 2017' // you can parse this to whathever you needs
+  }],
+  guildMembersOnline: 6,
+  guildInformation: 'guild information'
+]
+```

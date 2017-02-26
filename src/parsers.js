@@ -1,7 +1,8 @@
+import _ from 'lodash';
 import cheerio from 'cheerio';
 import { camelize } from './string-utils';
 
-const getWorldsData = ($) => {
+const getWorldsData = $ => {
   return (i, tr) => {
     const worldInfo = [];
     // To dont get the headers titles
@@ -21,7 +22,7 @@ const getWorldsData = ($) => {
   }
 };
 
-const onlinePlayersData = ($) => {
+const onlinePlayersData = $ => {
   return (i, tr) => {
     const characterData = [];
     // To dont get the headers titles
@@ -37,7 +38,7 @@ const onlinePlayersData = ($) => {
   }
 };
 
-const characterInformationData = ($) => {
+const characterInformationData = $ => {
   return (i, tr) => {
     const characterData = [];
     // To dont get the headers titles
@@ -51,7 +52,7 @@ const characterInformationData = ($) => {
   }
 };
 
-const characterDeathInformationData = ($) => {
+const characterDeathInformationData = $ => {
   return (i, tr) => {
     const characterDeathData = [];
     // To dont get the headers titles
@@ -63,6 +64,47 @@ const characterDeathInformationData = ($) => {
       date: characterDeathData[0],
       killedByMessage: characterDeathData[1],
     };
+  }
+};
+
+const guildInvitedsData = $ => {
+  return (i, tr) => {
+    const invitedMemberData = [];
+    // To dont get the headers titles
+    if (i === 0 || i === 1) return;
+    $(tr).find('td').each((index, td) => {
+      invitedMemberData.push($(td).text());
+    });
+    return {
+      name: invitedMemberData[0],
+      invitationDate: invitedMemberData[1],
+    };
+  }
+};
+
+const guildInformationData = $ => {
+  return (i, tr) => {
+    const memberData = [];
+    // To dont get the headers titles
+    if (i === 0) return;
+    $(tr).find('td').each((index, td) => {
+      memberData.push($(td).text());
+    });
+    // This is basically a hack.
+    // it was an easy fix related to this.
+    // http://stackoverflow.com/questions/32413180/cheerio-scraping-returning-only-two-rows
+    const level = memberData[3];
+    if (!isNaN(parseInt(level))) {
+      return {
+        level,
+        rank: memberData[0],
+        nameAndTitle: memberData[1],
+        vocation: memberData[2],
+        joiningDate: memberData[4],
+        status: memberData[5],
+        isOnline: memberData[5] === 'online' ? true : false,
+      };
+    }
   }
 };
 
@@ -107,4 +149,17 @@ export const tibiaCharacterDeathParser = body => {
          .find('tr')
          .map(characterDeathInformationData($))
          .get()
+}
+
+export const tibiaGuildInformationParser = body => {
+  const $ = cheerio.load(body);
+  const guildMembers = $('tr').map(guildInformationData($)).get();
+  const invitedMembers = $($('tr').parent()[15]).find('tr').map(guildInvitedsData($)).get();
+  const guildMembersOnline = _.compact(guildMembers.map(({ isOnline }) => isOnline));
+  return Object.assign({}, {
+    guildMembers,
+    invitedMembers,
+    guildMembersOnline: guildMembersOnline.length,
+    guildInformation: $('#GuildInformationContainer').text(),
+  });
 }

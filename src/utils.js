@@ -5,6 +5,7 @@ import {
   tibiaOnlinePlayersParser,
   tibiaCharacterDataParser,
   tibiaCharacterDeathParser,
+  tibiaGuildInformationParser,
 } from './parsers';
 
 export const requestUrl = (url, parser) => (
@@ -50,7 +51,7 @@ export const getCharacterInformationByName = characterName => (
       https://secure.tibia.com/community/?subtopic=characters&name=${characterName}
     `;
     requestUrl(characterByNameUrl, tibiaCharacterDataParser).then((result) => {
-      console.log(result);
+      resolve(result)
     }).catch((error) => reject(error))
   })
 );
@@ -65,3 +66,11 @@ export const getCharacterDeathInformationByName = characterName => (
     }).catch((error) => reject(error))
   })
 );
+
+export const getGuildInformationByUrl = guildUrl => (
+  new Promise((resolve, reject) => {
+    requestUrl(guildUrl, tibiaGuildInformationParser).then((result) => {
+      resolve(result);
+    }).catch((error) => reject(error))
+  })
+)
