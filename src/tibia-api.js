@@ -78,10 +78,4 @@ class TibiaAPI {
   }
 }
 
-const tibia = new TibiaAPI({ worldName: 'Zanera' });
-
-tibia.getGuildInformation('Last Resort').then((result) => {
-  console.log(result)
-}).catch((error) => console.log(error));
-
 export default TibiaAPI;
