@@ -18,7 +18,7 @@ class TibiaAPI {
 
   getOnlinePlayers(worldName) {
     return new Promise((resolve, reject) => {
-      let worldNameToUse = worldName ? worldName : this.world;
+      let worldNameToUse = worldName ? worldName : this.worldName;
       if (!worldNameToUse) {
         console.warn('No Game word passed');
         return;
