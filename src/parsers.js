@@ -61,8 +61,8 @@ const characterDeathInformationData = $ => {
       characterDeathData.push($(td).text());
     });
     return {
-      date: characterDeathData[0],
-      killedByMessage: characterDeathData[1],
+      timeAgo: characterDeathData[0],
+      killedBy: characterDeathData[1],
     };
   }
 };
@@ -153,11 +153,11 @@ export const tibiaCharacterDeathParser = body => {
 
 export const tibiaGuildInformationParser = body => {
   const $ = cheerio.load(body);
-  const guildMembers = $('tr').map(guildInformationData($)).get();
+  const members = $('tr').map(guildInformationData($)).get();
   const invitedMembers = $($('tr').parent()[15]).find('tr').map(guildInvitedsData($)).get();
-  const guildMembersOnline = _.compact(guildMembers.map(({ isOnline }) => isOnline));
+  const guildMembersOnline = _.compact(members.map(({ isOnline }) => isOnline));
   return Object.assign({}, {
-    guildMembers,
+    members,
     invitedMembers,
     guildMembersOnline: guildMembersOnline.length,
     guildInformation: $('#GuildInformationContainer').text(),

@@ -51,7 +51,7 @@ tibiaAPI.getOnlinePlayers(// optional to pass world name here).then((result) => 
 **Example response**
 ```
 [
-  { date: 'Feb 12 2017, 04:47:16 CET', killedByMessage: 'Killed  at Level 258 by Fenlord.' },
+  { timeAgo: 'Feb 12 2017, 04:47:16 CET', killedBy: 'Killed  at Level 258 by Fenlord.' },
   ...deaths
 ]
 ```
@@ -61,7 +61,7 @@ tibiaAPI.getOnlinePlayers(// optional to pass world name here).then((result) => 
 **Example response**
 ```
 [
-  guildMembers: [{
+  members: [{
     rank: ' ',
      nameAndTitle: 'Devade Pous',
      vocation: 'Royal Paladin',
