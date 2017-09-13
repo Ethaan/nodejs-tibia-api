@@ -1,10 +1,10 @@
 {
   "name": "tibia-api",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "NodeJS Tibia.com API",
   "main": "lib/tibia-api.js",
   "scripts": {
-    "compile": "babel --presets es2015 --plugins transform-object-rest-spread -d lib/ src/",
+    "build": "babel --presets es2015 --plugins transform-object-rest-spread -d lib/ src/",
     "dev": "npm run compile && node lib/tibia-api"
   },
   "author": "Ethaan",

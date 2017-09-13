@@ -59,23 +59,26 @@ class TibiaAPI {
     });
   }
 
-  getGuildInformation(guildNameOrUrl) {
-    if (!guildNameOrUrl) {
+  getGuildInformation({ guildUrl }) {
+    if (!guildUrl) {
       console.warn('Guild Name or url is needed');
       return;
     };
-    let guildUrl = guildNameOrUrl;
+    let guildUrlToUse = guildUrl;
     const baseGuildsUrl = 'https://secure.tibia.com/community/?subtopic=guilds&page=view&GuildName=';
-    const isByUrl = isUrl(guildNameOrUrl);
+    const isByUrl = isUrl(guildUrl);
     if (!isByUrl) {
-      guildUrl = `${baseGuildsUrl}${guildNameOrUrl.replace(/ /g, '+')}`;
+      guildUrlToUse = `${baseGuildsUrl}${guildNameOrUrl.replace(/ /g, '+')}`;
     };
     return new Promise((resolve, reject) => {
-      getGuildInformationByUrl(guildUrl).then((result) => {
+      getGuildInformationByUrl(guildUrlToUse).then((result) => {
         resolve(result);
       }).catch((error) => reject(error));
     });
   }
 }
 
+new TibiaAPI({ worldName: 'Zanera' }).getGuildInformation({
+  guildUrl: 'https://secure.tibia.com/community/?subtopic=guilds&page=view&GuildName=Adios&character=Adevas&action=characters',
+}).then((result) => console.log(result))
 export default TibiaAPI;
