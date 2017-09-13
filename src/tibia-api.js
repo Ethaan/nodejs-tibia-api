@@ -77,8 +77,3 @@ class TibiaAPI {
     });
   }
 }
-
-new TibiaAPI({ worldName: 'Zanera' }).getGuildInformation({
-  guildUrl: 'https://secure.tibia.com/community/?subtopic=guilds&page=view&GuildName=Adios&character=Adevas&action=characters',
-}).then((result) => console.log(result))
-export default TibiaAPI;
