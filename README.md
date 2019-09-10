@@ -4,7 +4,7 @@ Easy to use [Tibia](http://www.tibia.com/news/?subtopic=latestnews) API.
 
 ### Get started
 
-`npm install tibia-api;`
+`npm install tibia-api`
 
 ### How to use it.
 
