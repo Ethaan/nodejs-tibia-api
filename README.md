@@ -11,12 +11,10 @@ Easy to use [Tibia](http://www.tibia.com/news/?subtopic=latestnews) API.
 ```
 import TibiaAPI from 'tibia-api';
 
-const tibiaAPI = new TibiaAPI({ worldName: 'Zanera' });
+const tibiaAPI = new TibiaAPI({ worldName: 'Funera' });
 
-tibiaAPI.getOnlinePlayers(// optional to pass world name here).then((result) => {
-  console.log(result); // Array bassed online players to zanera
-}).catch((error) => {
-  console.log(error);
+tibiaAPI.getOnlinePlayers().then((result) => {
+  console.log(result);
 })
 ```
 ### Methods.
@@ -79,3 +77,7 @@ tibiaAPI.getOnlinePlayers(// optional to pass world name here).then((result) => 
   guildInformation: 'guild information'
 ]
 ```
+
+## TODO
+
+- [ ] Tests

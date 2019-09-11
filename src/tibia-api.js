@@ -1,7 +1,4 @@
 import {
-  requestUrl,
-  isAValidWorld,
-  getTibiaWorlds,
   getOnlinePlayersByWorld,
   getGuildInformationByUrl,
   getCharacterInformationByName,
@@ -23,15 +20,10 @@ class TibiaAPI {
         console.warn('No Game word passed');
         return;
       }
-      isAValidWorld(worldNameToUse).then((isValid) => {
-        if (isValid) {
-          getOnlinePlayersByWorld(worldNameToUse).then((result) => {
-            resolve(result)
-          }).catch((error) => console.log(error))
-        } else {
-          reject(`${worldNameToUse} is not a valud Server World`);
-        }
-      }).catch((error) => reject(error));
+
+      getOnlinePlayersByWorld(worldNameToUse).then((result) => {
+        resolve(result)
+      }).catch((error) => console.log(error))
     });
   }
 
@@ -54,7 +46,7 @@ class TibiaAPI {
     };
     return new Promise((resolve, reject) => {
       getCharacterDeathInformationByName(characterName).then((result) => {
-        resolve(result.invitedMembers);
+        resolve(result);
       }).catch((error) => reject(error));
     });
   }
@@ -77,3 +69,5 @@ class TibiaAPI {
     });
   }
 }
+
+export default TibiaAPI;

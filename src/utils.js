@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import cloudscraper from 'cloudscraper'
 import tinyreq from 'tinyreq';
 import {
   tibiaWorldsParser,
@@ -10,9 +11,11 @@ import {
 
 export const requestUrl = (url, parser) => (
   new Promise((resolve, reject) => {
-    tinyreq(url, (error, body) => {
-      if (error) reject(error);
+    cloudscraper.get(url).then((body) => {
       resolve(parser(body));
+    }).catch((error) => {
+      console.log(error);
+      reject(error)
     })
   })
 );
@@ -26,19 +29,9 @@ export const getTibiaWorlds = () => (
   })
 );
 
-export const isAValidWorld = world => {
-  return new Promise((resolve, reject) => {
-    getTibiaWorlds().then((result) => (
-      resolve(_.findIndex(result, (world) => world.name === world))
-    )).catch((error) => console.log(error))
-  });
-};
-
 export const getOnlinePlayersByWorld = world => (
   new Promise((resolve, reject) => {
-    const charactersByWorldUrl = `
-      https://secure.tibia.com/community/?subtopic=worlds&world=${world}
-    `;
+    const charactersByWorldUrl = `https://www.tibia.com/community/?subtopic=worlds&world=${world}`;
     requestUrl(charactersByWorldUrl, tibiaOnlinePlayersParser).then((result) => {
       resolve(result);
     }).catch((error) => reject(error))
@@ -47,9 +40,8 @@ export const getOnlinePlayersByWorld = world => (
 
 export const getCharacterInformationByName = characterName => (
   new Promise((resolve, reject) => {
-    const characterByNameUrl = `
-      https://secure.tibia.com/community/?subtopic=characters&name=${characterName}
-    `;
+    const characterByNameUrl = `https://www.tibia.com/community/?subtopic=characters&name=${encodeURI(characterName)}`;
+
     requestUrl(characterByNameUrl, tibiaCharacterDataParser).then((result) => {
       resolve(result)
     }).catch((error) => reject(error))
@@ -58,9 +50,8 @@ export const getCharacterInformationByName = characterName => (
 
 export const getCharacterDeathInformationByName = characterName => (
   new Promise((resolve, reject) => {
-    const characterByNameUrl = `
-      https://secure.tibia.com/community/?subtopic=characters&name=${characterName}
-    `;
+    const characterByNameUrl = `https://www.tibia.com/community/?subtopic=characters&name=${encodeURI(characterName)}`;
+
     requestUrl(characterByNameUrl, tibiaCharacterDeathParser).then((result) => {
       resolve(result);
     }).catch((error) => reject(error))

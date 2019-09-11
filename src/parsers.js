@@ -60,6 +60,7 @@ const characterDeathInformationData = $ => {
     $(tr).find('td').each((index, td) => {
       characterDeathData.push($(td).text());
     });
+
     return {
       timeAgo: characterDeathData[0],
       killedBy: characterDeathData[1],

@@ -1,15 +1,17 @@
 {
   "name": "tibia-api",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "NodeJS Tibia.com API",
   "main": "lib/tibia-api.js",
   "scripts": {
     "build": "babel --presets es2015 --plugins transform-object-rest-spread -d lib/ src/",
-    "dev": "npm run compile && node lib/tibia-api"
+    "dev": "npm run compile && node lib/tibia-api",
+    "test": "babel-node --presets es2015 test.js"
   },
   "author": "Ethaan",
   "license": "MIT",
   "devDependencies": {
+    "@babel/node": "^7.6.1",
     "babel-cli": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.22.0",
@@ -17,10 +19,11 @@
   },
   "dependencies": {
     "cheerio": "^0.22.0",
-    "tinyreq": "^3.2.0"
+    "cloudscraper": "^4.1.4",
+    "tibia-api": "^0.0.9"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Ethaan/nodejs-tibia-api"
+    "type": "git",
+    "url": "https://github.com/Ethaan/nodejs-tibia-api"
   }
 }
