@@ -99,7 +99,7 @@ const guildInformationData = $ => {
       return {
         level,
         rank: memberData[0],
-        name: memberData[1],
+        name: memberData[1].replace(/ *\([^)]*\) */g, ""),
         vocation: memberData[2],
         joiningDate: memberData[4],
         status: memberData[5],
