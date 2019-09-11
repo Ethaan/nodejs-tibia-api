@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import cloudscraper from 'cloudscraper'
-import tinyreq from 'tinyreq';
 import {
   tibiaWorldsParser,
   tibiaOnlinePlayersParser,
