@@ -23,7 +23,7 @@ class TibiaAPI {
 
       getOnlinePlayersByWorld(worldNameToUse).then((result) => {
         resolve(result)
-      }).catch((error) => console.log(error))
+      })
     });
   }
 

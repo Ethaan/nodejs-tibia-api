@@ -52,7 +52,7 @@ const characterInformationData = $ => {
   }
 };
 
-const characterDeathInformationData = $ => {
+const characterDeathInformationData = ($, characterName) => {
   return (i, tr) => {
     const characterDeathData = [];
     // To dont get the headers titles
@@ -62,6 +62,7 @@ const characterDeathInformationData = $ => {
     });
 
     return {
+      name: characterName,
       timeAgo: characterDeathData[0],
       killedBy: characterDeathData[1],
     };
@@ -141,15 +142,17 @@ export const tibiaCharacterDataParser = body => {
          }, {});
 };
 
-export const tibiaCharacterDeathParser = body => {
-  const $ = cheerio.load(body);
-  return $('b:contains("Character Deaths")')
-         .parent()
-         .parent()
-         .parent()
-         .find('tr')
-         .map(characterDeathInformationData($))
-         .get()
+export const tibiaCharacterDeathParser = (characterName) => {
+  return (body) => {
+    const $ = cheerio.load(body);
+    return $('b:contains("Character Deaths")')
+          .parent()
+          .parent()
+          .parent()
+          .find('tr')
+          .map(characterDeathInformationData($, characterName))
+          .get()
+  };
 }
 
 export const tibiaGuildInformationParser = body => {

@@ -13,7 +13,6 @@ export const requestUrl = (url, parser) => (
     cloudscraper.get(url).then((body) => {
       resolve(parser(body));
     }).catch((error) => {
-      console.log(error);
       reject(error)
     })
   })
@@ -51,7 +50,7 @@ export const getCharacterDeathInformationByName = characterName => (
   new Promise((resolve, reject) => {
     const characterByNameUrl = `https://www.tibia.com/community/?subtopic=characters&name=${encodeURI(characterName)}`;
 
-    requestUrl(characterByNameUrl, tibiaCharacterDeathParser).then((result) => {
+    requestUrl(characterByNameUrl, tibiaCharacterDeathParser(characterName)).then((result) => {
       resolve(result);
     }).catch((error) => reject(error))
   })

@@ -49,7 +49,11 @@ tibiaAPI.getOnlinePlayers().then((result) => {
 **Example response**
 ```
 [
-  { timeAgo: 'Feb 12 2017, 04:47:16 CET', killedBy: 'Killed  at Level 258 by Fenlord.' },
+  {
+    name: 'characterName',
+    timeAgo: 'Feb 12 2017, 04:47:16 CET',
+    killedBy: 'Killed  at Level 258 by Fenlord.'
+  },
   ...deaths
 ]
 ```
