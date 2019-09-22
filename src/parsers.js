@@ -54,15 +54,20 @@ const characterInformationData = $ => {
 
 const charactersListData = ($) => {
   return (i, tr) => {
-    console.log(i);
     const characterData = [];
     // To dont get the headers titles
     if (i === 0 || i === 1) return;
     $(tr).find('td').each((index, td) => {
-      characterData.push($(td).text());
+      const children = $(td).children();
+      if (children.is('b')) {
+        characterData.push(children.text());
+      } else {
+        characterData.push($(td).text());
+      }
     });
     
     const characterName = characterData[0];
+    console.log(characterData);
     return {
       name: characterName.substring(2, characterName.length).trim(),
       world: characterData[1],

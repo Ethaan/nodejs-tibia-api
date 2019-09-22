@@ -7,9 +7,14 @@ import {
   tibiaCharacterInformationParser,
 } from './parsers';
 
-export const requestUrl = (url, parser) => (
+export const requestUrl = (uri, parser) => (
   new Promise((resolve, reject) => {
-    cloudscraper.get(url).then((body) => {
+    cloudscraper.get({
+      uri,
+      header: {
+        'Cache-Control': 'max-age=0, no-cache, must-revalidate, proxy-revalidate',
+      },
+    }).then((body) => {
       resolve(parser(body));
     }).catch((error) => {
       reject(error)
