@@ -52,6 +52,25 @@ const characterInformationData = $ => {
   }
 };
 
+const charactersListData = ($) => {
+  return (i, tr) => {
+    console.log(i);
+    const characterData = [];
+    // To dont get the headers titles
+    if (i === 0 || i === 1) return;
+    $(tr).find('td').each((index, td) => {
+      characterData.push($(td).text());
+    });
+    
+    const characterName = characterData[0];
+    return {
+      name: characterName.substring(2, characterName.length).trim(),
+      world: characterData[1],
+      isOnline: characterData[2] === 'online',
+    }
+  }
+};
+
 const characterDeathInformationData = ($, characterName) => {
   return (i, tr) => {
     const characterDeathData = [];
@@ -142,16 +161,29 @@ export const tibiaCharacterDataParser = body => {
          }, {});
 };
 
-export const tibiaCharacterDeathParser = (characterName) => {
+export const tibiaCharacterInformationParser = (characterName) => {
   return (body) => {
     const $ = cheerio.load(body);
-    return $('b:contains("Character Deaths")')
+    const characters = $('b:contains("Characters")')
+      .parent()
+      .parent()
+      .parent()
+      .find('tr')
+      .map(charactersListData($, characterName))
+      .get()
+      .filter(({ world }) => world);
+
+    const kills =  $('b:contains("Character Deaths")')
           .parent()
           .parent()
           .parent()
           .find('tr')
           .map(characterDeathInformationData($, characterName))
-          .get()
+          .get();
+    return {
+      kills,
+      characters
+    }
   };
 }
 

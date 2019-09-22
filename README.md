@@ -21,41 +21,37 @@ tibiaAPI.getOnlinePlayers().then((result) => {
 
 `getOnlinePlayers(worldName)` - Method to get all the online players `worldName` is optional, but be sure to pass a `worldName` when you initialize the function.
 
+#### NOTE
+
+Tibia is taking some minutes to refresh the online list, so better use `getCharacterInformation`
+
 **Example response**
 ```
  {
-   { name: 'Abelardini', level: '246', vocation: 'Royal Paladin' },
-   ...more,
+   { name: String, level: String, vocation: String },
  }
-```
-`getCharacterInformation(characterName)` - Method to get the whole character information
+
+`getCharacterInformation(characterName)` - Method to get the whole character information by a giving name, like kills and online
 
 **Example response**
 ```
-{ 'name:': 'Diegopump ',
-  'sex:': 'male',
-  'vocation:': 'Elder Druid',
-  'level:': '257',
-  'achievementPoints:': '171',
-  'world:': 'Morta',
-  'residence:': 'Thais',
-  'lastLogin:': 'Feb 12 2017, 06:35:37 CET',
-  'accountStatus:': 'Free Account'
+{
+  kills: [
+    {
+      name: String,
+      timeAgo: String,
+      killedBy: String
+    },
+    ...deaths
+  ],
+  characters: [
+    {
+      name: String,
+      world: String,
+      isOnline: Boolean
+    }
+  ]
 }
-```
-
-`getCharacterDeathInformation(characterName)` - Method to get the whole character death information by a giving name
-
-**Example response**
-```
-[
-  {
-    name: 'characterName',
-    timeAgo: 'Feb 12 2017, 04:47:16 CET',
-    killedBy: 'Killed  at Level 258 by Fenlord.'
-  },
-  ...deaths
-]
 ```
 
 `getGuildInformation({ guildUrl })` - Method to get the guild information by a giving guild URL or guild name.
@@ -65,20 +61,19 @@ tibiaAPI.getOnlinePlayers().then((result) => {
 [
   members: [{
     rank: ' ',
-     name: 'Devade Pous',
-     vocation: 'Royal Paladin',
-     level: '140',
-     joiningDate: 'Dec 10 2016',
-     status: 'offline',
-     isOnline: false
-  },
-  ...moreCharacters],
-  invitedMembers: [{
-    name: 'Devade Pous',
-    invitationDate: 'Feb 20 2017' // you can parse this to whathever you needs
+     name: String,
+     vocation: String,
+     level: String,
+     joiningDate: String,
+     status: String,
+     isOnline: Boolean
   }],
-  guildMembersOnline: 6,
-  guildInformation: 'guild information'
+  invitedMembers: [{
+    name: String,
+    invitationDate: String
+  }],
+  guildMembersOnline: Number,
+  guildInformation: String
 ]
 ```
 

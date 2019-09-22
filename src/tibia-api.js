@@ -2,7 +2,6 @@ import {
   getOnlinePlayersByWorld,
   getGuildInformationByUrl,
   getCharacterInformationByName,
-  getCharacterDeathInformationByName,
 } from './utils';
 import { isUrl } from './string-utils';
 
@@ -29,23 +28,11 @@ class TibiaAPI {
 
   getCharacterInformation(characterName) {
     if (!characterName) {
-      console.warn('Characte rname is needed');
-      returnl;
-    };
-    return new Promise((resolve, reject) => {
-      getCharacterInformationByName(characterName).then((result) => {
-        resolve(result);
-      }).catch((error) => reject(error));
-    });
-  }
-
-  getCharacterDeathInformation(characterName) {
-    if (!characterName) {
-      console.warn('Charactername is needed');
+      console.warn('Character name is needed');
       return;
     };
     return new Promise((resolve, reject) => {
-      getCharacterDeathInformationByName(characterName).then((result) => {
+      getCharacterInformationByName(characterName).then((result) => {
         resolve(result);
       }).catch((error) => reject(error));
     });

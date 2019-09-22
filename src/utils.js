@@ -3,9 +3,8 @@ import cloudscraper from 'cloudscraper'
 import {
   tibiaWorldsParser,
   tibiaOnlinePlayersParser,
-  tibiaCharacterDataParser,
-  tibiaCharacterDeathParser,
   tibiaGuildInformationParser,
+  tibiaCharacterInformationParser,
 } from './parsers';
 
 export const requestUrl = (url, parser) => (
@@ -40,17 +39,7 @@ export const getCharacterInformationByName = characterName => (
   new Promise((resolve, reject) => {
     const characterByNameUrl = `https://www.tibia.com/community/?subtopic=characters&name=${encodeURI(characterName)}`;
 
-    requestUrl(characterByNameUrl, tibiaCharacterDataParser).then((result) => {
-      resolve(result)
-    }).catch((error) => reject(error))
-  })
-);
-
-export const getCharacterDeathInformationByName = characterName => (
-  new Promise((resolve, reject) => {
-    const characterByNameUrl = `https://www.tibia.com/community/?subtopic=characters&name=${encodeURI(characterName)}`;
-
-    requestUrl(characterByNameUrl, tibiaCharacterDeathParser(characterName)).then((result) => {
+    requestUrl(characterByNameUrl, tibiaCharacterInformationParser(characterName)).then((result) => {
       resolve(result);
     }).catch((error) => reject(error))
   })
