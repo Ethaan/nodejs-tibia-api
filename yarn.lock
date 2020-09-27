@@ -719,8 +719,8 @@ class-utils@^0.3.5:
     static-extend "^0.1.1"
 
 cloudscraper@^4.1.4:
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/cloudscraper/-/cloudscraper-4.1.4.tgz#e8a76aa2cf37cc664aaa01abf76d101254329031"
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/cloudscraper/-/cloudscraper-4.6.0.tgz#bb83157cd18c2e24a0a2de748e2cbde23f6ff684"
   dependencies:
     request-promise "^4.2.4"
 
